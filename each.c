@@ -10,7 +10,7 @@
 
 #define MODEMSETTING "/dev/ttyO1"
 #define BAUDRATE B4800
-// ssh test git push
+
 int fd;
 char buffer[8];
 
@@ -43,10 +43,9 @@ int main()
    char address[256];
    int test_send = FALSE;
 
-
    setting_serial_port();
 
-   for (;;) {
+   while (TRUE) {
 
 	   //Delay
 	   if (test_send == TRUE) {
@@ -59,7 +58,7 @@ int main()
 	   if (strstr(line,"$GPRMC") != 0) {
 
 		   test_send = TRUE;
-		   //printf("Res1:[%s]\n", line);
+		   printf("Res:[%s]\n", line);
 		   parseMSG(line, &location, size);
 
 		   buildLink(&location, address);
@@ -211,8 +210,8 @@ void parseMSG(char *msg, struct Location *location, int size)
 		location->Speed[strlen(token_vel)] = 0;
 
 	}
-
-/*	printf("Time:[%s]\n", location->Time);
+/*
+	printf("Time:[%s]\n", location->Time);
 	printf("Status:[%s]\n", location->status);
 	printf("Lat:[%s]\n", location->Lat);
 	printf("N_S_indicator:[%s]\n", location->N_S_indicator);
@@ -220,8 +219,8 @@ void parseMSG(char *msg, struct Location *location, int size)
 	printf("E_W_indicator:[%s]\n", location->E_W_indicator);
 	printf("Speed:[%s]\n", location->Speed);
 	printf("angle:[%s]\n", location->angle);
-	printf("Date:[%s]\n", location->Date);*/
-
+	printf("Date:[%s]\n", location->Date);
+*/
 }
 
 /*
